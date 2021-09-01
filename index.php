@@ -3293,7 +3293,7 @@ function getPhone(): string
         <thead>
         <tr>
             <th lay-data="{field:'id', width:100}">序号</th>
-            <th lay-data="{field:'name}">姓名</th>
+            <th lay-data="{field:'name'}">姓名</th>
             <th lay-data="{field:'cert_no'}">身份证</th>
             <th lay-data="{field:'card_no'}">银行卡号</th>
             <th lay-data="{field:'phone'}">手机号</th>
