@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>随机四要素</title>
+</head>
+<link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+
+<body>
+<div class="layui-bg-gray">
+    <div class="layui-card">
+        <div class="layui-card-header layui-anim layui-anim-down" style="text-align: center"><h2>随机四要素</h2></div>
+        <div class="layui-card-body layui-anim layui-anim-up">
+            <table class="layui-hide" id="four_element_table" lay-filter="user"></table>
+            <div style="text-align: center" class="layui-form">
+                <label for="number">展示条数</label>
+                <div class="layui-input-inline">
+                    <select name="number" id="number">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" selected>5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                    </select>
+                </div>
+                <button class="layui-btn" id="numberQuery" data-type="reload">
+                    <i class="layui-icon layui-icon-refresh-3"> 刷新</i>
+
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+<script>
+    layui.use('table', function () {
+        let table = layui.table;
+
+        //方法级渲染
+        table.render({
+            'title': '随机四要素',
+            elem: '#four_element_table',
+            url: './handle.php',
+            cols: [[
+                {field: 'id', title: 'ID', width: 80, fixed: 'left'},
+                {field: 'name', title: '姓名'},
+                {field: 'phone', title: '手机号'},
+                {field: 'cert_no', title: '身份证号'},
+                {field: 'card_no', title: '银行卡号'},
+                {field: 'bank_name', title: '银行名称'},
+                {field: 'bank_code', title: '银行编码'},
+            ]],
+            id: 'testReload',
+            toolbar: true,
+            error: function () {
+                layer.open({
+                    title: 500,
+                    content: 'what the fuck?数据生成报错了!!!',
+                    icon: 5,
+                    anim: 4
+                });
+            }
+        });
+
+        let $ = layui.$, active = {
+            reload: function () {
+                //执行重载
+                table.reload('testReload', {
+                    where: {
+                        number: $('#number').val()
+                    }
+                });
+            }
+        };
+
+
+        $('#numberQuery').on('click', function () {
+            let type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+
+</script>
+</html>
