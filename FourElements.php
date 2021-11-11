@@ -3291,8 +3291,9 @@ class FourElements
         ];
         $bin = $cardBin[mt_rand(0, count($cardBin) - 1)];
         $random = mt_rand(1111111111, 9999999999) . mt_rand(1111111111, 9999999999);
+		$sub = $bin[1] - strlen($bin[0]);
         return [
-            'card_no' => $bin[0] . substr($random, 0, $bin[1]),
+            'card_no' => $bin[0] . substr($random, 0, $sub),
             'bank_name' => $bin[2],
             'bank_code' => $bin[3]
         ];
